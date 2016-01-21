@@ -2,5 +2,6 @@ services:
   - consul-server
   - registrator
   - myapp
-export:
+config:
   hostip: 10.0.2.15
+  debug: true

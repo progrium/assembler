@@ -10,7 +10,7 @@ import (
   _ "github.com/gliderlabs/sigil/builtin"
 )
 
-var config = make(map[string]string)
+var config = make(map[string]interface{})
 var services = make(map[string]interface{})
 
 func main() {
@@ -19,10 +19,10 @@ func main() {
   fatal(err)
   var obj map[string]interface{}
 	fatal(yaml.Unmarshal(data, &obj))
-  if value, ok := obj["export"]; ok {
+  if value, ok := obj["config"]; ok {
     exports := value.(map[interface{}]interface{})
     for k,v := range exports {
-      config[k.(string)] = v.(string)
+      config[k.(string)] = v
     }
   }
   if value, ok := obj["services"]; ok {
@@ -43,12 +43,12 @@ func load(name string) {
   fatal(err)
   var service map[string]interface{}
 	fatal(yaml.Unmarshal(rendered.Bytes(), &service))
-  if value, ok := service["export"]; ok {
+  if value, ok := service["extra"]; ok {
     exports := value.(map[interface{}]interface{})
     for k,v := range exports {
-      config[k.(string)] = v.(string)
+      config[k.(string)] = v
     }
-    delete(service, "export")
+    delete(service, "extra")
   }
   services[name] = service
 }
