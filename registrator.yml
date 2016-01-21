@@ -1,0 +1,6 @@
+image: gliderlabs/registrator:latest
+container_name: registrator
+net: host
+volumes:
+  - /var/run/docker.sock:/tmp/docker.sock
+command: -ip={{ $hostip }} consul://{{ $hostip }}:8500

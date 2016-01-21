@@ -1,0 +1,3 @@
+image: myapp
+container_name: app
+dns: {{ $dns }}
