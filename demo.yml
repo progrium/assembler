@@ -5,3 +5,5 @@ services:
 config:
   hostip: 10.0.2.15
   debug: true
+  foo:
+    bar: baz

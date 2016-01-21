@@ -1,7 +1,8 @@
 image: myapp
 container_name: app
 dns: {{ $dns }}
-{{ if .debug }}
 environment:
+  - FOOBAR={{ $foo.bar }}
+{{ if .debug }}
   - DEBUG=true
 {{ end }}
